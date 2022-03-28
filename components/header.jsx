@@ -17,40 +17,51 @@ export default function Header(props) {
 	useEffect(() => {
 		props.refList.page1.current.scrollIntoView({ behavior: "smooth" });
 	});
+	const headerButton = [
+		{
+			display: "About Me",
+			pageNumber: "page1",
+		},
+		{
+			display: "Projects",
+			pageNumber: "page2",
+		},
+		{
+			display: "Achievements",
+			pageNumber: "page3",
+		},
+		{
+			display: "Tools",
+			pageNumber: "page4",
+		},
+		{
+			display: "Contact Me",
+			pageNumber: "page5",
+		},
+	];
 	return (
 		<Flex minHeight={10} justifyContent="flex-end" p={5}>
 			<Center display="flex" justifyContent="space-evenly">
-				<Heading
-					cursor="pointer"
-					size="xs"
-					ml={2}
-					onClick={() => {
-						// Check if the ref exists in the current context
-						if (props.refList.page1.current !== null) {
-							return props.refList.page1.current.scrollIntoView({
-								behavior: "smooth",
-							});
-						}
-						router.push("/");
-					}}
-				>
-					Page 1
-				</Heading>
-				<Heading
-					cursor="pointer"
-					size="xs"
-					ml={2}
-					onClick={() => {
-						if (props.refList.page2.current !== null) {
-							return props.refList.page2.current.scrollIntoView({
-								behavior: "smooth",
-							});
-						}
-						props.refList.page2.current.scrollIntoView({ behavior: "smooth" });
-					}}
-				>
-					Page 2
-				</Heading>
+				{headerButton.map((button) => (
+					<Heading
+						key={button.pageNumber}
+						cursor="pointer"
+						size="xs"
+						ml={2}
+						onClick={() => {
+							// Check if the ref exists in the current context
+							if (props.refList[button.pageNumber].current !== null) {
+								return props.refList[button.pageNumber].current.scrollIntoView({
+									behavior: "smooth",
+								});
+							}
+							router.push("/");
+						}}
+					>
+						{button.display}
+					</Heading>
+				))}
+
 				<IconButton
 					icon={colorMode === "dark" ? <FaMoon /> : <FaSun />}
 					isRound={true}

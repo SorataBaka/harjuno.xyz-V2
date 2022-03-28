@@ -3,14 +3,19 @@ import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
-
 import { useRef } from "react";
 function MyApp({ Component, pageProps }) {
 	const page1ref = useRef(null);
 	const page2ref = useRef(null);
+	const page3ref = useRef(null);
+	const page4ref = useRef(null);
+	const page5ref = useRef(null);
 	const references = {
 		page1: page1ref,
 		page2: page2ref,
+		page3: page3ref,
+		page4: page4ref,
+		page5: page5ref,
 	};
 	pageProps.references = references;
 	return (
@@ -52,7 +57,15 @@ function MyApp({ Component, pageProps }) {
 				/>
 				<meta property="twitter:image" content="/api/assets/snapshot.png" />
 			</Head>
-			<Header refList={{ page1: page1ref, page2: page2ref }} />
+			<Header
+				refList={{
+					page1: page1ref,
+					page2: page2ref,
+					page3: page3ref,
+					page4: page4ref,
+					page5: page5ref,
+				}}
+			/>
 			<Component {...pageProps} />
 			<Footer />
 		</ChakraProvider>
