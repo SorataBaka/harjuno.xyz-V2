@@ -1,29 +1,30 @@
 {
-  "name": "harjuno.xyz-v2.0",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/react": "^1.8.7",
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "framer-motion": "^6.2.8",
-    "next": "12.1.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "sharp": "^0.30.3"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.1",
-    "husky": "^7.0.4"
-  }
+	"name": "harjuno.xyz-v2.0",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"start:prod": "next build && next start"
+	},
+	"dependencies": {
+		"@chakra-ui/react": "^1.8.7",
+		"@emotion/react": "^11.8.2",
+		"@emotion/styled": "^11.8.1",
+		"framer-motion": "^6.2.8",
+		"next": "12.1.1",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-icons": "^4.3.1",
+		"sharp": "^0.30.3"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^16.2.3",
+		"@commitlint/config-conventional": "^16.2.1",
+		"eslint": "8.12.0",
+		"eslint-config-next": "12.1.1",
+		"husky": "^7.0.4"
+	}
 }
