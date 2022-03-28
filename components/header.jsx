@@ -43,7 +43,8 @@ export default function Header(props) {
 		<Flex minHeight={10} justifyContent="flex-end" p={5}>
 			<Center display="flex" justifyContent="space-evenly">
 				{headerButton.map((button) => (
-					<Heading
+					<Button
+						variant="ghost"
 						key={button.pageNumber}
 						cursor="pointer"
 						size="xs"
@@ -59,7 +60,7 @@ export default function Header(props) {
 						}}
 					>
 						{button.display}
-					</Heading>
+					</Button>
 				))}
 
 				<IconButton

@@ -1,7 +1,32 @@
 import styles from "../styles/Home.module.css";
-import { Heading, Flex, Center, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import {
+	Heading,
+	Flex,
+	Center,
+	HStack,
+	VStack,
+	StackDivider,
+} from "@chakra-ui/react";
+import { ProfilePictureHeading, Description } from "../components/Profile";
+import { useEffect, useRef, useState } from "react";
 export default function Home(props) {
+	const [isMobile, setIsMobile] = useState(false);
+	useEffect(() => {
+		if (window.innerWidth < 768) {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+		window.addEventListener("resize", () => {
+			if (window.innerWidth < 950) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+		});
+	}, []);
+
+	console.log(isMobile);
 	return (
 		<>
 			<Flex
@@ -9,25 +34,25 @@ export default function Home(props) {
 				justifyContent="center"
 				m={0}
 				p={0}
-				h="100vh"
+				minHeight="100vh"
 				ref={props.references.page1}
+				padding={10}
 			>
 				<Center flexDir={"column"}>
-					<Flex position="relative" bottom={5}>
-						<Image
-							src={"/profile.jpg"}
-							width={200}
-							height={200}
-							alt="Christian Harjuno Profile Picture"
-							className="rounder-full"
-							style={{ borderRadius: "100%" }}
-						/>
-					</Flex>
-					<Heading>Christian Harjuno</Heading>
-					<Heading size="xs" mt={2}>
-						Discord Bot and Web Developer
-					</Heading>
-					<Text>Greetings! Im Chris. </Text>
+					{!isMobile ? (
+						<HStack
+							divider={<StackDivider borderColor="gray.400" />}
+							spacing={10}
+						>
+							<ProfilePictureHeading />
+							<Description />
+						</HStack>
+					) : (
+						<VStack divider={<StackDivider borderColor="gray.400" />}>
+							<ProfilePictureHeading isMobile={isMobile} />
+							<Description isMobile={isMobile} />
+						</VStack>
+					)}
 				</Center>
 			</Flex>
 			<Flex

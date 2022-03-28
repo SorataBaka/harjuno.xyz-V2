@@ -4,6 +4,7 @@ import Footer from "../components/footer.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRef } from "react";
+
 function MyApp({ Component, pageProps }) {
 	const page1ref = useRef(null);
 	const page2ref = useRef(null);
