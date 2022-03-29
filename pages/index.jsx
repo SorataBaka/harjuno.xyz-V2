@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import {
 	Heading,
 	Flex,
@@ -8,25 +7,8 @@ import {
 	StackDivider,
 } from "@chakra-ui/react";
 import { ProfilePictureHeading, Description } from "../components/Profile";
-import { useEffect, useRef, useState } from "react";
 export default function Home(props) {
-	const [isMobile, setIsMobile] = useState(false);
-	useEffect(() => {
-		if (window.innerWidth < 768) {
-			setIsMobile(true);
-		} else {
-			setIsMobile(false);
-		}
-		window.addEventListener("resize", () => {
-			if (window.innerWidth < 950) {
-				setIsMobile(true);
-			} else {
-				setIsMobile(false);
-			}
-		});
-	}, []);
-
-	console.log(isMobile);
+	const { isMobile } = props;
 	return (
 		<>
 			<Flex
