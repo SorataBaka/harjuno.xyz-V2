@@ -4,7 +4,7 @@ import Footer from "./footer.jsx";
 import Head from "./head.jsx";
 import { useRef, useState, useEffect } from "react";
 import React from "react";
-
+import { Collapse, Flex, Heading } from "@chakra-ui/react";
 export default function Layout({ children }) {
 	// const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 	const references = {
@@ -16,6 +16,10 @@ export default function Layout({ children }) {
 	};
 	const [isMobile, setIsMobile] = useState(false);
 	const [sidebarOpen, setSidebarOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+	setTimeout(() => {
+		setIsLoading(false);
+	}, 2000);
 	useEffect(() => {
 		window.innerWidth > 950 ? setIsMobile(false) : setIsMobile(true);
 		window.addEventListener("resize", () => {
@@ -25,6 +29,19 @@ export default function Layout({ children }) {
 	return (
 		<>
 			<Head />
+			<Collapse in={isLoading} animateOpacity unmountOnExit={true}>
+				<Flex
+					alignItems="center"
+					justifyContent="center"
+					h="100vh"
+					w="99vw"
+					position="absolute"
+					zIndex={1}
+					backgroundColor="gray.900"
+				>
+					<Heading>Christian Harjuno</Heading>
+				</Flex>
+			</Collapse>
 			<Topbar
 				refList={references}
 				sidebarOpen={sidebarOpen}
