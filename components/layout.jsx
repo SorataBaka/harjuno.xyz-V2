@@ -4,22 +4,29 @@ import Footer from "./footer.jsx";
 import Head from "./head.jsx";
 import { useRef, useState, useEffect } from "react";
 import React from "react";
-import { Collapse, Flex, Heading } from "@chakra-ui/react";
+import {
+	Collapse,
+	Flex,
+	Heading,
+	useColorMode,
+	useColorModeValue,
+} from "@chakra-ui/react";
 export default function Layout({ children }) {
-	// const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 	const references = {
 		page1: useRef(null),
 		page2: useRef(null),
 		page3: useRef(null),
 		page4: useRef(null),
 		page5: useRef(null),
+		page6: useRef(null),
 	};
 	const [isMobile, setIsMobile] = useState(false);
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
+	const colorMode = useColorModeValue("white", "gray.900");
 	setTimeout(() => {
 		setIsLoading(false);
-	}, 2000);
+	}, 1500);
 	useEffect(() => {
 		window.innerWidth > 950 ? setIsMobile(false) : setIsMobile(true);
 		window.addEventListener("resize", () => {
@@ -37,7 +44,7 @@ export default function Layout({ children }) {
 					w="99vw"
 					position="absolute"
 					zIndex={1}
-					backgroundColor="gray.900"
+					backgroundColor={colorMode}
 				>
 					<Heading>Christian Harjuno</Heading>
 				</Flex>
@@ -48,17 +55,6 @@ export default function Layout({ children }) {
 				setSidebarOpen={setSidebarOpen}
 				isMobile={isMobile}
 			/>
-			{/* <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
-				<DrawerOverlay />
-				<DrawerContent>
-					<DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
-					<DrawerBody>
-						<p>Some contents...</p>
-						<p>Some contents...</p>
-						<p>Some contents...</p>
-					</DrawerBody>
-				</DrawerContent>
-			</Drawer> */}
 			<Header
 				refList={references}
 				sidebarOpen={sidebarOpen}

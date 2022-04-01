@@ -16,12 +16,16 @@ export default function Topbar(props) {
 			pageNumber: "page3",
 		},
 		{
-			display: "Tools",
+			display: "Activity",
 			pageNumber: "page4",
 		},
 		{
-			display: "Contact Me",
+			display: "Tools",
 			pageNumber: "page5",
+		},
+		{
+			display: "Contact Me",
+			pageNumber: "page6",
 		},
 	];
 	const router = useRouter();
