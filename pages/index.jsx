@@ -5,11 +5,21 @@ import {
 	HStack,
 	VStack,
 	StackDivider,
+	useColorMode,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 const githubAuth = process.env.GITHUB_AUTH;
 import { ProfilePictureHeading, Description } from "../components/Profile";
+import styles from "../styles/Home.module.css";
+
 export default function Home(props) {
 	const { isMobile } = props;
+	const router = useRouter();
+	let redirectToGithub = (url) => {
+		router.replace(url);
+	};
+	const { colorMode } = useColorMode();
 	return (
 		<>
 			<Flex
@@ -70,31 +80,60 @@ export default function Home(props) {
 				h="100vh"
 				ref={props.references.page4}
 			>
-				<HStack flexDir="row" divider={<StackDivider />} spacing={10}>
-					<Heading marginBottom={10}>Activity</Heading>
+				<VStack alignContent="center" justifyContent="center">
+					<Heading size="2xl" marginBottom={10}>
+						Activity
+					</Heading>
 					<VStack
 						overflowY="scroll"
-						maxH={"70%"}
-						backgroundColor="gray.900"
+						maxH={"60%"}
+						backgroundColor={colorMode === "dark" ? "gray.900" : "gray.300"}
 						borderRadius={10}
 						padding={5}
+						spacing={5}
 					>
 						{props.activitydata.map((item, index) => {
 							return (
 								<Flex
 									key={index}
-									backgroundColor="gray.700"
+									backgroundColor={
+										colorMode === "dark" ? "gray.700" : "gray.100"
+									}
 									flexDir="row"
 									w={"100%"}
 									padding={10}
 									borderRadius={10}
+									onClick={() => {
+										redirectToGithub(item.repository.url);
+									}}
+									cursor="pointer"
 								>
-									<Heading size="xs">{item.repository.name}</Heading>
+									<HStack justifyContent="flex-start" spacing={10}>
+										<Image
+											src={
+												colorMode === "dark"
+													? "/github-light.png"
+													: "/github-dark.png"
+											}
+											width={50}
+											height={50}
+											alt="github logo"
+										/>
+										<VStack alignItems="flex-start" justifyContent="flex-start">
+											<Heading size="md" maxWidth={"60%"} isTruncated>
+												{item.repository.name}
+											</Heading>
+											<Heading size="xs">
+												Last commit at:{" "}
+												{new Date(item.occurredAt).toLocaleString()}
+											</Heading>
+										</VStack>
+									</HStack>
 								</Flex>
 							);
 						})}
 					</VStack>
-				</HStack>
+				</VStack>
 			</Flex>
 			<Flex
 				alignContent="center"
