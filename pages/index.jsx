@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 const githubAuth = process.env.GITHUB_AUTH;
 import { ProfilePictureHeading, Description } from "../components/Profile";
-import styles from "../styles/Home.module.css";
 
 export default function Home(props) {
 	const { isMobile } = props;
@@ -91,6 +90,7 @@ export default function Home(props) {
 						borderRadius={10}
 						padding={5}
 						spacing={5}
+						w={"80vw"}
 					>
 						{props.activitydata.map((item, index) => {
 							return (
@@ -108,7 +108,12 @@ export default function Home(props) {
 									}}
 									cursor="pointer"
 								>
-									<HStack justifyContent="flex-start" spacing={10}>
+									<HStack
+										justifyContent="flex-start"
+										spacing={10}
+										maxWidth={"100%"}
+										isTruncated={isMobile ? true : false}
+									>
 										<Image
 											src={
 												colorMode === "dark"
@@ -120,9 +125,7 @@ export default function Home(props) {
 											alt="github logo"
 										/>
 										<VStack alignItems="flex-start" justifyContent="flex-start">
-											<Heading size="md" maxWidth={"60%"} isTruncated>
-												{item.repository.name}
-											</Heading>
+											<Heading size="md">{item.repository.name}</Heading>
 											<Heading size="xs">
 												Last commit at:{" "}
 												{new Date(item.occurredAt).toLocaleString()}
@@ -150,6 +153,7 @@ export default function Home(props) {
 			<Flex
 				alignContent="center"
 				justifyContent="center"
+				flexDir="column"
 				m={0}
 				p={0}
 				h="100vh"
@@ -157,6 +161,22 @@ export default function Home(props) {
 			>
 				<Center>
 					<Heading>Contact Me</Heading>
+					{isMobile ? (
+						<Heading>This is the mobile version</Heading>
+					) : (
+						<HStack>
+							<Image
+								src={
+									colorMode === "dark"
+										? "/github-light.png"
+										: "/github-dark.png"
+								}
+								width={50}
+								height={50}
+								alt="Github logo"
+							/>
+						</HStack>
+					)}
 				</Center>
 			</Flex>
 		</>
@@ -185,7 +205,7 @@ export async function getServerSideProps(context) {
 			`,
 		}),
 		headers: {
-			Authorization: `${githubAuth}`,
+			Authorization: `${githubAuth.split("\n")[0]}`,
 			"Content-Type": "application/json",
 		},
 	});
